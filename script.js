@@ -16,12 +16,14 @@
 
     fetch(repos_url).then(data => data.text()).then(data => {
       var raw = JSON.parse(data);
+      console.log(raw)
       repos = raw.map(repo => ({
         html_url: repo.html_url,
         name: repo.name,
         description: repo.description || "(Sem descrição)",
         created_at: repo.created_at,
-        updated_at: repo.updated_at
+        updated_at: repo.updated_at,
+        homepage: repo.homepage
       }));
       
       var repoList = repos.map(repo => `
@@ -30,7 +32,7 @@
           <p>${repo.description}</p>
           <p>Criado em: ${repo.created_at}</p>
           <p>Última atualização: ${repo.updated_at}</p>
-          <p class="repo-url"><a href="${repo.html_url}" target="_blank"><i class="fa-fw fab fa-github"></i> Acessar</a></p>
+          <p class="repo-url"><a href="${repo.homepage || repo.html_url}" target="_blank"><i class="fa-fw fab fa-github"></i> Acessar</a></p>
         </div>
       `);
       repoList = repoList.join('');
