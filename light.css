@@ -13,7 +13,7 @@ body {
   top: -15px;
   width: 120px;
   height: 120px;
-  background: radial-gradient(farthest-corner at 25px 25px, rgba(34, 34, 34, .7), transparent 70%);
+  background: radial-gradient(farthest-corner at 25px 25px, rgba(34, 34, 34, .3), transparent 70%);
 }
 
 header {
