@@ -1,0 +1,65 @@
+<!DOCTYPE html lang="pt-BR">
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>succ</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: sans-serif;
+            }
+            body {
+                margin: 10px;
+                display: flex;
+                flex-direction: column;
+                background: #FF5252;
+                color: #FAFAFA;
+            }
+            h1 { margin-bottom: 2em; font-size: 30pt; text-align: center; }
+            h1 a { color: #FAFAFA; }
+            div#padoru {
+                margin: 10px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            div#padoru a {
+                text-align: center;
+                color: #222222;
+                padding: 1em;
+                width: 200px;
+                text-decoration: none;
+                font-weight: bold;
+                margin: 1em;
+                background-color: rgba(255, 255, 255, .7);
+                border-radius: 5px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Fonte das imagens: <a href="https://github.com/shadow578/Project-Padoru" target="_blank">Project Padoru</a></h1>
+        <div id="padoru"></div>
+    </body>
+    <script type="text/javascript">
+        (() => {
+            fetch("https://raw.githubusercontent.com/shadow578/Project-Padoru/master/padoru.json")
+                .then(data => data.json()).then(({Entries}) => {
+                var padoru = Entries.map(({Image, Name}) => {
+                    const url = `https://github.com/shadow578/Project-Padoru/raw/master/${Image}`;
+                    return `
+                        <a href="${url}" target="_blank">
+                            <span>${Name}</span>
+                            <img src="${url}" alt="${Name}" width="150" height="150" />
+                        </a>
+                    `
+                });
+                
+                padoru = padoru.join('');
+                
+                document.querySelector("div#padoru").innerHTML = padoru;
+            });
+        })();
+    </script>
+</html>
